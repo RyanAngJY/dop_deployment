@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: deployment-flask-backend
+    labels:
+        environment: production
+    annotations:
+        imageregistry: "https://hub.docker.com/"
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            appName: flask-backend-app
+    template:
+        metadata:
+            labels:
+                appName: flask-backend-app
+        spec:
+            containers:
+                - name: flask-backend-container
+                  image: ryanang/backend_server:latest
+                  imagePullPolicy: Always
+                  ports:
+                      - containerPort: 8000

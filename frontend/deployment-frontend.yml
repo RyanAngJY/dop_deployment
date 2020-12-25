@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: deployment-react-frontend
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            appName: react-frontend-app
+    template:
+        metadata:
+            labels:
+                appName: react-frontend-app
+        #  This is actually your Pod-level configuration
+        spec:
+            containers:
+                - name: react-frontend-container
+                  image: ryanang/frontend_server:latest
+                  imagePullPolicy: Always
+                  ports:
+                      - containerPort: 3000

@@ -1,0 +1,25 @@
+# This is known as a Kubernetes "Object"
+apiVersion: apps/v1 # which version of the Kubernetes API you are using
+kind: Deployment # what kind of "Object" you want to create
+metadata: # data that helps uniquely identify the "Object"
+    name: deployment-flask-backend
+    labels: # these are user-defined labels for this "Object", you can put any key/value pair here. Note that is is possible that different Objects can carry the same label(s)
+        environment: production
+    annotations: # there are user_defined annotations for this "Object". Annotations are just "extra" data. Unlike labels, you cannot identify "Objects" with certain annotations (eg. with label, you can run something like "kubectl get pods -l environment=production", but you CANNOT do this with annotations)
+        imageregistry: "https://hub.docker.com/"
+spec: # This is your deployment-level configuration
+    replicas: 1
+    selector: # defines how this Deployment "Object" finds which Pods to manage. In this case, we are just finding the Pod defined below in the "template" section
+        matchLabels:
+            appName: flask-backend-app
+    template: # This is your pod-level configuration
+        metadata:
+            labels:
+                appName: flask-backend-app
+        spec:
+            containers:
+                - name: flask-backend-container
+                  image: ryanang/backend_server
+                  imagePullPolicy: Always # NOTE: this does not mean that Kubernetes will watch for a new image and pull that image when it gets updated. You need to delete the Pod if you want Kubernetes to re-pull the image. This option actually just tells the Node to pull the image even if the Node has an image by that name.
+                  ports:
+                      - containerPort: 8087

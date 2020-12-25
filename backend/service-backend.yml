@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: flask-backend-service
+spec:
+    ports:
+        - port: 8000
+          nodePort: 30003
+          protocol: TCP
+    selector:
+        appName: flask-backend-app # references the deployment-backend.yml
+    type: NodePort
