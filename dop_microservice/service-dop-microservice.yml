@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: dop-microservice-service
+spec:
+    ports:
+        - port: 50051
+          nodePort: 30003
+          protocol: TCP
+    selector:
+        appName: dop-microservice # references the deployment-frontend.yml
+    type: NodePort

@@ -18,7 +18,10 @@ spec:
         spec:
             containers:
                 - name: flask-backend-container
-                  image: ryanang/backend_server:latest
+                  image: ryanang/dop_server_flask:latest
                   imagePullPolicy: Always
                   ports:
                       - containerPort: 8000
+                  env:
+                      - name: GRPC_HOST
+                        value: "dop-microservice-service"

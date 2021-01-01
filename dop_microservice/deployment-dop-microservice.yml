@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: dop-microservice-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            appName: dop-microservice
+    template:
+        metadata:
+            labels:
+                appName: dop-microservice
+        spec:
+            containers:
+                - name: dop-microservice-container
+                  image: ryanang/dop_microservice:latest
+                  imagePullPolicy: Always
+                  ports:
+                      - containerPort: 50051

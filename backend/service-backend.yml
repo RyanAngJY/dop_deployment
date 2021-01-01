@@ -5,7 +5,7 @@ metadata:
 spec:
     ports:
         - port: 8000
-          nodePort: 30003
+          nodePort: 30002 # you can curl this on localhost to hit this endpoint (eg. curl http://localhost:30002/api/)
           protocol: TCP
     selector:
         appName: flask-backend-app # references the deployment-backend.yml
