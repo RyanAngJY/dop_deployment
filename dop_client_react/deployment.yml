@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: deployment-react-frontend
+    name: dop-client-react-deployment
 spec:
     replicas: 1
     selector:
         matchLabels:
-            appName: react-frontend-app
+            appName: dop-client-react
     template:
         metadata:
             labels:
-                appName: react-frontend-app
+                appName: dop-client-react
         #  This is actually your Pod-level configuration
         spec:
             containers:
-                - name: react-frontend-container
+                - name: dop-client-react-container
                   image: ryanang/dop_client_react:latest
                   imagePullPolicy: Always
                   ports:

@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-    name: flask-backend-service
+    name: dop-server-flask-service
 spec:
     ports:
         - port: 8000
           nodePort: 30002 # you can curl this on localhost to hit this endpoint (eg. curl http://localhost:30002/api/)
           protocol: TCP
     selector:
-        appName: flask-backend-app # references the deployment-backend.yml
+        appName: dop-server-flask # references the dop_server_flask_deployment.yml
     type: NodePort

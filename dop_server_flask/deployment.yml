@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: deployment-flask-backend
+    name: dop-server-flask-deployment
     labels:
         environment: production
     annotations:
@@ -10,14 +10,14 @@ spec:
     replicas: 1
     selector:
         matchLabels:
-            appName: flask-backend-app
+            appName: dop-server-flask
     template:
         metadata:
             labels:
-                appName: flask-backend-app
+                appName: dop-server-flask
         spec:
             containers:
-                - name: flask-backend-container
+                - name: dop-server-flask-container
                   image: ryanang/dop_server_flask:latest
                   imagePullPolicy: Always
                   ports:
