@@ -1,11 +1,17 @@
-cd client_react
-make push
+# To Deploy
 
-cd server_flask
-make push
+```
+cd ../dop_client_react
+make push_to_docker_hub
 
-cd deployment
-make fullstack
+cd ../dop_server_flask
+make push_to_docker_hub
+
+cd ../dop_deployment
+make deploy_all
+```
+
+Then, open the browser at localhost:30001
 
 # To redploy
 
