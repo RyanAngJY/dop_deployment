@@ -56,9 +56,5 @@ shell_dop_microservice:
 	@$(eval pod := $(shell kubectl get pods | grep -o 'dop-microservice-[a-z0-9\-]*'))
 	kubectl exec --stdin --tty $(pod) -- /bin/sh
 
-test:
-	$(eval test := $(shell echo "hello"))
-	echo $(test)
-
 healthcheck:
 	curl http://localhost:30002/api/
