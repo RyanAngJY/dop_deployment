@@ -42,8 +42,8 @@ delete_all:
 # ======= Development =======
 debug: # Note that you might need to wait for the container to be deployed before you can actually run the shell
 	kubectl apply -f helpers/debug-container.yml
-	kubectl exec -it curlcontainer -- sh 
 	# you can try curl dop-server-flask-service:8000/api/ once you are in the shell
+	kubectl exec -it curlcontainer -- sh 
 
 shell_dop_client_react:
 	@$(eval podname = $(shell kubectl get pods | grep -o '$(DOP_CLIENT_REACT_DEPLOYMENT)-[a-z0-9\-]*'))
