@@ -45,16 +45,16 @@ shell:
 	kubectl exec --stdin --tty dop-server-flask-deployment-54949b5d8c-cjlkg -- /bin/sh
 
 shell_dop_client_react:
-	@$(eval pod := $(shell kubectl get pods | grep -o 'dop-client-react-deployment-[a-z0-9\-]*'))
-	kubectl exec --stdin --tty $(pod) -- /bin/sh
+	@$(eval podname := $(shell kubectl get pods | grep -o 'dop-client-react-deployment-[a-z0-9\-]*'))
+	kubectl exec --stdin --tty $(podname) -- /bin/sh
 
 shell_dop_server_flask:
-	@$(eval pod := $(shell kubectl get pods | grep -o 'dop-server-flask-deployment-[a-z0-9\-]*'))
-	kubectl exec --stdin --tty $(pod) -- /bin/sh
+	@$(eval podname := $(shell kubectl get pods | grep -o 'dop-server-flask-deployment-[a-z0-9\-]*'))
+	kubectl exec --stdin --tty $(podname) -- /bin/sh
 
 shell_dop_microservice:
-	@$(eval pod := $(shell kubectl get pods | grep -o 'dop-microservice-[a-z0-9\-]*'))
-	kubectl exec --stdin --tty $(pod) -- /bin/sh
+	@$(eval podname := $(shell kubectl get pods | grep -o 'dop-microservice-[a-z0-9\-]*'))
+	kubectl exec --stdin --tty $(podname) -- /bin/sh
 
 healthcheck:
 	curl http://localhost:30002/api/
