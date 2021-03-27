@@ -24,4 +24,6 @@ spec:
                       - containerPort: 8000
                   env:
                       - name: GRPC_HOST
-                        value: "dop-microservice-service"
+                        value: "dop-microservice-service" # defined in dop_microservice/service.yml
+                      - name: KAFKA_HOST
+                        value: "kafka-service" # defined in kafka/kafka-service.yml

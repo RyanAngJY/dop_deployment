@@ -2,10 +2,10 @@
 
 ```
 cd ../dop_client_react
-make push_to_docker_hub
+make push
 
 cd ../dop_server_flask
-make push_to_docker_hub
+make push
 
 cd ../dop_deployment
 make deploy_all

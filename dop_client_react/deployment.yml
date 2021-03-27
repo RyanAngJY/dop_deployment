@@ -7,11 +7,10 @@ spec:
     selector:
         matchLabels:
             appName: dop-client-react
-    template:
+    template: #  This is actually your Pod-level configuration
         metadata:
             labels:
                 appName: dop-client-react
-        #  This is actually your Pod-level configuration
         spec:
             containers:
                 - name: dop-client-react-container

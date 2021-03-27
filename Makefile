@@ -15,6 +15,7 @@ deploy_dop_client_react:
 
 deploy_dop_server_flask:
 	kubectl apply -f dop_server_flask/deployment.yml -f dop_server_flask/service.yml
+	kubectl apply -f kafka
 
 deploy_dop_microservice:
 	kubectl apply -f dop_microservice/deployment.yml -f dop_microservice/service.yml
@@ -45,15 +46,19 @@ debug: # Note that you might need to wait for the container to be deployed befor
 	# you can try curl dop-server-flask-service:8000/api/ once you are in the shell
 
 shell_dop_client_react:
-	@$(eval podname := $(shell kubectl get pods | grep -o '$(DOP_CLIENT_REACT_DEPLOYMENT)-[a-z0-9\-]*'))
+	@$(eval podname = $(shell kubectl get pods | grep -o '$(DOP_CLIENT_REACT_DEPLOYMENT)-[a-z0-9\-]*'))
 	kubectl exec --stdin --tty $(podname) -- /bin/sh
 
 shell_dop_server_flask:
-	@$(eval podname := $(shell kubectl get pods | grep -o '$(DOP_SERVER_FLASK_DEPLOYMENT)-[a-z0-9\-]*'))
+	@$(eval podname = $(shell kubectl get pods | grep -o '$(DOP_SERVER_FLASK_DEPLOYMENT)-[a-z0-9\-]*'))
 	kubectl exec --stdin --tty $(podname) -- /bin/sh
 
 shell_dop_microservice:
-	@$(eval podname := $(shell kubectl get pods | grep -o '$(DOP_MICROSERVICE_DEPLOYMENT)-[a-z0-9\-]*'))
+	@$(eval podname = $(shell kubectl get pods | grep -o '$(DOP_MICROSERVICE_DEPLOYMENT)-[a-z0-9\-]*'))
+	kubectl exec --stdin --tty $(podname) -- /bin/sh
+
+shell_broker:
+	@$(eval podname = $(shell kubectl get pods | grep -o 'kafka-[a-z0-9\-]*'))
 	kubectl exec --stdin --tty $(podname) -- /bin/sh
 
 healthcheck:
