@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: {{ .Values.dop_client_react.service_name }}
+spec:
+    ports:
+        - port: {{ .Values.dop_client_react.container_port }}
+          nodePort: {{ .Values.dop_client_react.node_port }}
+          protocol: TCP
+    selector:
+        appName: {{ .Values.dop_client_react.pod_label }}
+    type: NodePort

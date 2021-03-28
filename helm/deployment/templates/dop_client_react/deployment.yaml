@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: {{ .Values.dop_client_react.deployment_name }}
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            appName: {{ .Values.dop_client_react.pod_label }}
+    template:
+        metadata:
+            labels:
+                appName: {{ .Values.dop_client_react.pod_label }}
+        spec:
+            containers:
+                - name: {{ .Values.dop_client_react.container_name }}
+                  image: {{ .Values.dop_client_react.image }}
+                  imagePullPolicy: Always
+                  ports:
+                      - containerPort: {{ .Values.dop_client_react.container_port }}

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: {{ .Values.dop_server_flask.deployment_name }}
+    labels:
+        environment: production
+    annotations:
+        imageregistry: "https://hub.docker.com/"
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            appName: {{ .Values.dop_server_flask.pod_label }}
+    template:
+        metadata:
+            labels:
+                appName: {{ .Values.dop_server_flask.pod_label }}
+        spec:
+            containers:
+                - name: {{ .Values.dop_server_flask.container_name }}
+                  image: {{ .Values.dop_server_flask.image }}
+                  imagePullPolicy: Always
+                  ports:
+                      - containerPort: {{ .Values.dop_server_flask.container_port }}
+                  env:
+                      - name: GRPC_HOST
+                        value: {{ .Values.dop_server_flask.grpc_host }}
+                      - name: KAFKA_HOST
+                        value: {{ .Values.dop_server_flask.kafka_host }}

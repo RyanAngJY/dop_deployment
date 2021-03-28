@@ -1,0 +1,30 @@
+# This is for local kubernetes cluster
+
+dop_client_react:
+    container_name: dop-client-react-container
+    deployment_name: dop-client-react-deployment
+    service_name: dop-client-react-service
+    pod_label: dop-client-react
+    image: ryanang/dop_client_react:latest # image on Docker Hub
+    container_port: 80 # exposed port in Dockerfile
+    node_port: 30001 # localhost port
+
+dop_microservice:
+    container_name: dop-microservice-container
+    deployment_name: dop-microservice-deployment
+    service_name: dop-microservice-service
+    pod_label: dop-microservice
+    image: ryanang/dop_microservice:latest # image on Docker Hub
+    container_port: 50051 # exposed port in Dockerfile
+    node_port: 30003 # localhost port
+
+dop_server_flask:
+    container_name: dop-server-flask-container
+    deployment_name: dop-server-flask-deployment
+    service_name: dop-server-flask-service
+    pod_label: dop-server-flask
+    image: ryanang/dop_server_flask:latest # image on Docker Hub
+    container_port: 8000 # exposed port in Dockerfile
+    node_port: 30002 # localhost port
+    grpc_host: dop-microservice-service
+    kafka_host: kafka-service
