@@ -11,18 +11,7 @@ cd ../dop_microservice
 make push
 
 cd ../dop_deployment
-make deploy
+make deploy_dev
 ```
 
 Then, open the browser at localhost:30001
-
-# To redploy
-
-To redeploy images, you need to run:
-
-```
-kubectl get pods
-kubectl delete pod <pod-name>
-```
-
-This will trigger re-pullling of the docker image (since we set the imagePullPolicy to always)

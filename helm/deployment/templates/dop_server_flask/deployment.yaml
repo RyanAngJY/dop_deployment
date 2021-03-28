@@ -15,6 +15,7 @@ spec:
         metadata:
             labels:
                 appName: {{ .Values.dop_server_flask.pod_label }}
+                date: "{{ now | unixEpoch }}" # we force helm to think of this as a new yaml, and therefore force it to re-pull the latest image
         spec:
             containers:
                 - name: {{ .Values.dop_server_flask.container_name }}

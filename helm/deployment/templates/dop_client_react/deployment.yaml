@@ -11,6 +11,7 @@ spec:
         metadata:
             labels:
                 appName: {{ .Values.dop_client_react.pod_label }}
+                date: "{{ now | unixEpoch }}" # we force helm to think of this as a new yaml, and therefore force it to re-pull the latest image
         spec:
             containers:
                 - name: {{ .Values.dop_client_react.container_name }}

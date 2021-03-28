@@ -1,3 +1,6 @@
+DOP_CLIENT_REACT_DEPLOYMENT := dop-client-react-deployment
+DOP_SERVER_FLASK_DEPLOYMENT := dop-server-flask-deployment
+DOP_MICROSERVICE_DEPLOYMENT := dop-microservice-deployment
 HELM_ROOT:=helm/deployment/
 
 # ======= Deployment =======
