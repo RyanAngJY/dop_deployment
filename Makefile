@@ -1,18 +1,20 @@
 DOP_CLIENT_REACT_DEPLOYMENT := dop-client-react-deployment
 DOP_SERVER_FLASK_DEPLOYMENT := dop-server-flask-deployment
 DOP_MICROSERVICE_DEPLOYMENT := dop-microservice-deployment
-HELM_ROOT:=helm/deployment/
+HELM_ROOT:=helm/deployment
+RELEASE_NAME:=first-release
+
+.DEFAULT_GOAL := deploy_dev # set default target to run
 
 # ======= Deployment =======
 deploy_dev:
-	helm upgrade first-release -f $(HELM_ROOT)local_values.yaml $(HELM_ROOT)
-
-deploy_prod:
-	helm upgrade first-release -f $(HELM_ROOT)prod_values.yaml $(HELM_ROOT)
+	helm upgrade --install $(RELEASE_NAME) -f $(HELM_ROOT)/local_values.yaml $(HELM_ROOT)
 
 delete_all:
-	kubectl delete --all deployments
-	kubectl delete --all services
+	helm delete $(RELEASE_NAME)
+
+history:
+	helm history $(RELEASE_NAME)
 
 # ======= Development =======
 debug: # Note that you might need to wait for the container to be deployed before you can actually run the shell
