@@ -1,32 +1,32 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-    name: {{ .Values.kafka.deployment_name }}
+    name: kafka-broker0
 spec:
-    replicas: {{ .Values.kafka.replicas }}
+    replicas: 1
     selector:
         matchLabels:
-            app: {{ .Values.kafka.pod_label }}
-            id: "{{ .Values.kafka.pod_id }}"
+            app: kafka-pod
+            id: "0"
     template:
         metadata:
             labels:
-                app: {{ .Values.kafka.pod_label }}
-                id: "{{ .Values.kafka.pod_id }}"
+                app: kafka-pod
+                id: "0"
         spec:
             containers:
-                - name: {{ .Values.kafka.container_name }}
-                  image: {{ .Values.kafka.image }}
+                - name: kafka-pod
+                  image: wurstmeister/kafka
                   ports:
-                      - containerPort: {{ .Values.kafka.container_port }}
+                      - containerPort: 9092
                   env:
                       - name: KAFKA_ADVERTISED_PORT
-                        value: "{{ .Values.kafka.kafka_advertised_port }}"
+                        value: "9092"
                       - name: KAFKA_ADVERTISED_HOST_NAME
-                        value: {{ .Values.kafka.kafka_advertised_host_name }}
+                        value: "kafka-service"
                       - name: KAFKA_ZOOKEEPER_CONNECT
-                        value: {{ .Values.kafka.kafka_zookeeper_connect }}
+                        value: zoo1:2181
                       - name: KAFKA_BROKER_ID
-                        value: "{{ .Values.kafka.kafka_broker_id }}"
+                        value: "0"
                       - name: KAFKA_CREATE_TOPICS
-                        value: {{ .Values.kafka.kafka_create_topics }}
+                        value: testtopic:3:1

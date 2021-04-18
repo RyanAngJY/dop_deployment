@@ -1,19 +1,19 @@
 apiVersion: v1
 kind: Service
 metadata:
-    name: {{ .Values.zookeeper.service_name }}
+    name: zoo1
     labels:
-        app: {{ .Values.zookeeper.pod_label }}
+        app: zookeeper-1
 spec:
     ports:
         - name: client
-          port: {{ .Values.zookeeper.client_port }}
+          port: 2181
           protocol: TCP
         - name: follower
-          port: {{ .Values.zookeeper.follower_port }}
+          port: 2888
           protocol: TCP
         - name: leader
-          port: {{ .Values.zookeeper.leader_port }}
+          port: 3888
           protocol: TCP
     selector:
-        app: {{ .Values.zookeeper.pod_label }}
+        app: zookeeper-1

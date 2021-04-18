@@ -1,13 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-    name: {{ .Values.kafka.service_name }}
+    name: kafka-service
+    # labels:
+    #     name: kafka-pod
 spec:
     ports:
-        - port: {{ .Values.kafka.container_port }}
+        - port: 9092
           name: kafka-port
           protocol: TCP
     selector:
-        app: {{ .Values.kafka.pod_label }}
-        id: "{{ .Values.kafka.pod_id }}"
+        app: kafka-pod
+        id: "0"
     type: LoadBalancer

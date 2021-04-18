@@ -8,7 +8,7 @@ RELEASE_NAME:=first-release
 .DEFAULT_GOAL := deploy_dev # set default target to run
 
 # ======= Deployment =======
-deploy_dev:
+deploy_dev: delete_all
 	helm upgrade --install $(RELEASE_NAME) -f $(HELM_ROOT)/local_values.yaml $(HELM_ROOT)
 
 delete_all:
@@ -61,8 +61,16 @@ logs_broker:
 	@$(eval podname = $(shell kubectl get pods | grep -o 'kafka-broker[a-z0-9\-]*'))
 	kubectl logs --follow $(podname)
 
+shell_zk:
+	@$(eval podname = $(shell kubectl get pods | grep -o 'zookeeper-deploy[a-z0-9\-]*'))
+	kubectl exec --stdin --tty $(podname) -- /bin/sh
+
+logs_zk:
+	@$(eval podname = $(shell kubectl get pods | grep -o 'zookeeper-deploy[a-z0-9\-]*'))
+	kubectl logs --follow $(podname)
+
 healthcheck:
-	curl http://localhost:30002/api/
+	curl http://192.168.64.2:30002/api/
 
 list:
 	@echo make deploy_dev
@@ -79,4 +87,6 @@ list:
 	@echo make shell_dop_microservice
 	@echo make shell_broker
 	@echo make logs_broker
+	@echo make shell_zk
+	@echo make logs_zk
 	@echo make healthcheck
