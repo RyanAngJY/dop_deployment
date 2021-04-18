@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: {{ .Values.dop_kafka_consumer.deployment_name }}
+    labels:
+        environment: production
+    annotations:
+        imageregistry: "https://hub.docker.com/"
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            appName: {{ .Values.dop_kafka_consumer.pod_label }}
+    template:
+        metadata:
+            labels:
+                appName: {{ .Values.dop_kafka_consumer.pod_label }}
+                date: "{{ now | unixEpoch }}" # we force helm to think of this as a new yaml, and therefore force it to re-pull the latest image
+        spec:
+            containers:
+                - name: {{ .Values.dop_kafka_consumer.container_name }}
+                  image: {{ .Values.dop_kafka_consumer.image }}
+                  imagePullPolicy: Always
+                  env:
+                      - name: KAFKA_HOST
+                        value: {{ .Values.dop_kafka_consumer.kafka_host }}
+                      - name: SERVER_FLASK_HOST
+                        value: {{ .Values.dop_server_flask.service_name }}
+                      - name: SERVER_FLASK_PORT
+                        value: "{{ .Values.dop_server_flask.container_port }}"

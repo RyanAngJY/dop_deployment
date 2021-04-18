@@ -7,6 +7,8 @@ dop_client_react:
     image: ryanang/dop_client_react:latest # image on Docker Hub
     container_port: 80 # exposed port in Dockerfile
     node_port: 30001 # localhost port
+    react_app_backend_base_url: http://192.168.64.2:30002/api
+    react_app_socket_base_url: http://192.168.64.2:30002/
     
     service_name: dop-client-react-service
 
@@ -29,8 +31,20 @@ dop_server_flask:
     node_port: 30002 # localhost port
     grpc_host: dop-microservice-service # dop_microservice's service name
     kafka_host: kafka-service
+    mysql_host: dop-database.cvsrbibageju.ap-southeast-1.rds.amazonaws.com
+    mysql_user: admin
+    mysql_password: dopdatabaseroot
+    mysql_database: dop_database
     
     service_name: dop-server-flask-service
+
+dop_kafka_consumer:
+    container_name: dop-kafka-consumer-container
+    deployment_name: dop-kafka-consumer-deployment
+    pod_label: dop-kafka-consumer
+    image: ryanang/dop_kafka_consumer:latest # image on Docker Hub
+    kafka_host: kafka-service
+    service_name: dop-kafka-consumer-service
 
 kafka:
     container_name: kafka-pod
@@ -51,7 +65,7 @@ kafka:
 zookeeper:
     container_name: zoo1
     deployment_name: zookeeper-deploy
-    replicas: 2
+    replicas: 1
     pod_label: zookeeper-1
     image: digitalwonderland/zookeeper
     container_port: 2181
