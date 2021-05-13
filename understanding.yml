@@ -24,4 +24,4 @@ spec:
                   image: ryanang/backend_server
                   imagePullPolicy: Always # NOTE: this does not mean that Kubernetes will watch for a new image and pull that image when it gets updated. You need to delete the Pod if you want Kubernetes to re-pull the image. This option actually just tells the Node to pull the image even if the Node has an image by that name.
                   ports:
-                      - containerPort: 8087
+                      - containerPort: 8087 # this should be the PORT number exposed by your container (in your Dockerfile)
