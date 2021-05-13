@@ -14,4 +14,6 @@ cd ../dop_deployment
 make deploy_dev
 ```
 
-Then, open the browser at localhost:30001
+Then, open the browser at http://192.168.64.2:30001 (if using Minikube)
+OR
+Then, open the browser at http://localhost:30001 (if using Docker Desktop's Kubernetes)
