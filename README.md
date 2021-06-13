@@ -18,6 +18,9 @@ Run `minikube service dop-client-react-service --url`. Then, open the browser at
 OR
 Then, open the browser at http://localhost:30001 (if using Docker Desktop's Kubernetes)
 
+## To test connectivity to AWS EKS cluster
+curl http://<Load Balancer DNS name>:8000/api/
+
 ## To test connectivity within the Cluster itself
 For Backend Server:
 ```
