@@ -1,5 +1,12 @@
-# To Deploy
+# To Oon AWS EKS Cluster Deploy
+- Use the "load-balancer.yaml" instead of "service.yaml"
+```
+k config use-context arn:aws:eks:ap-southeast-1:504067213677:cluster/dop-dev-ops-project
+make deploy_dev
+```
 
+# To Deploy
+- Use the "service.yaml" instead of "load-balancer.yaml"
 ```
 cd ../dop_client_react
 make push
@@ -11,6 +18,8 @@ cd ../dop_microservice
 make push
 
 cd ../dop_deployment
+
+k config use-context minikube
 make deploy_dev
 ```
 
