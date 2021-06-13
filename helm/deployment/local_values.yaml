@@ -7,8 +7,8 @@ dop_client_react:
     image: ryanang/dop_client_react:latest # image on Docker Hub
     container_port: 80 # exposed port in Dockerfile
     node_port: 30001 # localhost port
-    react_app_backend_base_url: http://192.168.64.2:30002/api
-    react_app_socket_base_url: http://192.168.64.2:30002/
+    react_app_backend_base_url: http://192.168.64.3:30002/api
+    react_app_socket_base_url: http://192.168.64.3:30002/
     
     service_name: dop-client-react-service
 

@@ -1,12 +1,12 @@
-apiVersion: v1
-kind: Service
-metadata:
-    name: {{ .Values.dop_server_flask.service_name }}
-spec:
-    ports:
-        - port: {{ .Values.dop_server_flask.container_port }}
-          nodePort: {{ .Values.dop_server_flask.node_port }}
-          protocol: TCP
-    selector:
-        appName: {{ .Values.dop_server_flask.pod_label }}
-    type: NodePort
+# apiVersion: v1
+# kind: Service
+# metadata:
+#     name: {{ .Values.dop_server_flask.service_name }}
+# spec:
+#     ports:
+#         - port: {{ .Values.dop_server_flask.container_port }}
+#           nodePort: {{ .Values.dop_server_flask.node_port }}
+#           protocol: TCP
+#     selector:
+#         appName: {{ .Values.dop_server_flask.pod_label }}
+#     type: NodePort
